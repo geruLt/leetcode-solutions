@@ -1,19 +1,15 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int sum;
-        int j_lim = 0;
-        vector<int> solutions;
-        for (int i = 0; i < nums.size() - 1; i++) {
-            j_lim++;
-            for (int j = j_lim; j < nums.size(); j++) {
-                sum = nums[i] + nums[j];
-                if (sum == target) {
-                    solutions = {i, j};
-                    return solutions;
-                }
+        int to_complete;
+        map<int,int> history;
+        for (int i = 0; i < nums.size(); i++) {
+            to_complete = target - nums[i];
+            if (history.count(to_complete)) {
+                return {history[to_complete],i};
             }
+            history[nums[i]] = i;
         }
-        return solutions;
+            return {};
     }
 };
